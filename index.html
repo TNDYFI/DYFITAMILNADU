@@ -644,138 +644,128 @@ with your business.
 
   
 <!-- ======= Partner Section ======= -->
-  <section id="partners" class="partners">
-    <h1 align="center">our membership </h1></h2>
+           <section id="partners" class="partners" style="padding: 60px 0; background: #fff;">
+  <div class="container">
+    <h2 align="center" style="color: #ed1c24; margin-bottom: 30px; font-family: sans-serif; font-weight: bold;">உறுப்பினர் சேர்க்கை விபரம்</h2>
 
-  <style>
-    
-
-    .quote-box {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      margin-bottom: 50px;
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: auto;
-    }
-
-    .counters {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-
-    .counter {
-      background: #a40000;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      min-width: 150px;
-    }
-
-    .counter h2 {
-      font-size: 2.5rem;
-      margin: 0;
-      color: white;
-    }
-
-    .counter p {
-      margin: 5px 0 0;
-      color:white;
-    }
-  </style>
-
-
-  <div class="counters">
-    <div class="counter">
-      <h2 id="clients-count">0</h2>
-      <p>2023</p>
+    <div id="tn-total-card" style="background: #ed1c24; color: white; padding: 40px 20px; border-radius: 20px; text-align: center; max-width: 500px; margin: 0 auto 30px; box-shadow: 0 10px 30px rgba(237,28,36,0.3); transform: scale(0.6); opacity: 0; transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+      <p style="margin:0; font-size: 1rem; opacity: 0.9;">தமிழ்நாடு முழுவதும்</p>
+      <h1 id="tn-val" style="font-size: 3.5rem; margin: 10px 0; font-weight: 900;">0</h1>
+      <p style="margin:0; font-style: italic;">ஒற்றுமை | படிப்பு | போராட்டம்</p>
     </div>
-    <div class="counter">
-      <h2 id="projects-count">0</h2>
-      <p>2024</p>
-    </div>
-    <div class="counter">
-      <h2 id="awards-count">0</h2>
-      <p>2025</p>
+
+    <div style="max-width: 600px; margin: 0 auto; background: #fdfdfd; border: 1px solid #eee; border-radius: 15px; padding: 10px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05);">
+      <h4 style="text-align: center; color: #555; padding: 10px 0; border-bottom: 1px solid #eee;">மாவட்ட வாரியான விபரம் (Scroll செய்யவும்)</h4>
+      
+      <div id="district-scroll-box" style="height: 400px; overflow-y: auto; padding: 10px;">
+        </div>
     </div>
   </div>
-<script>
-  // Rotating Quotes (unchanged)
-  let quoteIndex = 0;
-  setInterval(() => {
-    quoteIndex = (quoteIndex + 12) % quotes.length;
-    document.getElementById('quote-box').innerText = `"${quotes[quoteIndex]}"`;
-  }, 8000);
 
-  // Auto Counting Animation
-  function animateValue(id, start, end, duration) {
-    let obj = document.getElementById(id);
-    let startTimestamp = null;
-    const step = (timestamp) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-      obj.innerText = Math.floor(progress * (end - start) + start);
-      if (progress < 1) {
+  <style>
+    #district-scroll-box::-webkit-scrollbar { width: 6px; }
+    #district-scroll-box::-webkit-scrollbar-thumb { background: #ed1c24; border-radius: 10px; }
+    
+    .dist-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 15px 20px; margin-bottom: 10px; border-radius: 12px;
+      color: white; font-weight: bold; font-family: sans-serif;
+      opacity: 0; transform: translateY(15px); transition: 0.5s all ease;
+    }
+    .dist-row.visible { opacity: 1; transform: translateY(0); }
+  </style>
+
+  <script>
+    (function() {
+      // Full District Data with Divided Chennai and Madurai
+      const districts = [
+        {name: "வட சென்னை", count: 32000, color: "#e74c3c"},
+        {name: "மத்திய சென்னை", count: 28500, color: "#3498db"},
+        {name: "தென் சென்னை", count: 31000, color: "#9b59b6"},
+        {name: "மதுரை மாநகரம்", count: 42000, color: "#27ae60"},
+        {name: "மதுரை புறநகர்", count: 35000, color: "#1abc9c"},
+        {name: "கோவை", count: 78900, color: "#f39c12"},
+        {name: "திருச்சி", count: 65100, color: "#16a085"},
+        {name: "நெல்லை", count: 54300, color: "#e67e22"},
+        {name: "சேலம்", count: 61200, color: "#2c3e50"},
+        {name: "தஞ்சாவூர்", count: 48500, color: "#d35400"},
+        {name: "வேலூர்", count: 52100, color: "#2980b9"},
+        {name: "திண்டுக்கல்", count: 44000, color: "#c0392b"},
+        {name: "தூத்துக்குடி", count: 41000, color: "#1abc9c"},
+        {name: "கன்னியாகுமரி", count: 39000, color: "#16a085"},
+        {name: "ஈரோடு", count: 37000, color: "#27ae60"},
+        {name: "விருதுநகர்", count: 34000, color: "#2980b9"},
+        {name: "திருப்பூர்", count: 46000, color: "#8e44ad"},
+        {name: "காஞ்சிபுரம்", count: 33000, color: "#f1c40f"},
+        {name: "திருவள்ளூர்", count: 31500, color: "#2ecc71"},
+        {name: "கடலூர்", count: 38000, color: "#34495e"},
+        {name: "விழுப்புரம்", count: 40500, color: "#e74c3c"},
+        {name: "நாகப்பட்டினம்", count: 29000, color: "#9b59b6"},
+        {name: "திருவாரூர்", count: 31000, color: "#1abc9c"},
+        {name: "புதுக்கோட்டை", count: 33500, color: "#27ae60"},
+        {name: "ராமநாதபுரம்", count: 28000, color: "#f39c12"},
+        {name: "சிவகங்கை", count: 27500, color: "#e67e22"},
+        {name: "தேனி", count: 26000, color: "#2c3e50"},
+        {name: "கரூர்", count: 25000, color: "#d35400"},
+        {name: "நாமக்கல்", count: 29500, color: "#2980b9"},
+        {name: "நீலகிரி", count: 18000, color: "#c0392b"},
+        {name: "அரியலூர்", count: 21000, color: "#16a085"},
+        {name: "பெரம்பலூர்", count: 19500, color: "#8e44ad"},
+        {name: "தர்மபுரி", count: 34500, color: "#2ecc71"},
+        {name: "கிருஷ்ணகிரி", count: 32000, color: "#3498db"},
+        {name: "திருவண்ணாமலை", count: 39000, color: "#f1c40f"},
+        {name: "தென்காசி", count: 28000, color: "#e74c3c"},
+        {name: "ராணிப்பேட்டை", count: 25500, color: "#27ae60"},
+        {name: "திருப்பத்தூர்", count: 24000, color: "#2980b9"},
+        {name: "கள்ளக்குறிச்சி", count: 31000, color: "#f39c12"},
+        {name: "செங்கல்பட்டு", count: 36000, color: "#16a085"},
+        {name: "மயிலாடுதுறை", count: 22500, color: "#d35400"}
+      ];
+
+      function animateCounter(elId, endValue) {
+        let obj = document.getElementById(elId);
+        let start = 0;
+        let duration = 2000;
+        let range = endValue - start;
+        let startTime = null;
+
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          let progress = Math.min((timestamp - startTime) / duration, 1);
+          obj.innerText = Math.floor(progress * range + start).toLocaleString();
+          if (progress < 1) { window.requestAnimationFrame(step); }
+        }
         window.requestAnimationFrame(step);
       }
-    };
-    window.requestAnimationFrame(step);
-  }
 
-  // Scroll-based animation trigger
-  const counters = [
-    { id: "clients-count", start: 0, end: 500000, duration: 1500 },
-    { id: "projects-count", start: 0, end: 700000, duration: 1500 },
-    { id: "awards-count", start: 0, end: 700001, duration: 1500 }
-  ];
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const tnCard = document.getElementById('tn-total-card');
+            tnCard.style.opacity = "1";
+            tnCard.style.transform = "scale(1)";
+            animateCounter('tn-val', 700001);
 
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const targetId = entry.target.id;
-        const counter = counters.find(c => c.id === targetId);
-        if (counter) {
-          animateValue(counter.id, counter.start, counter.end, counter.duration);
-          observer.unobserve(entry.target); // Run once
-        }
-      }
-    });
-  }, {
-    threshold: 0.5 // Trigger when 50% visible
-  });
+            const scrollBox = document.getElementById('district-scroll-box');
+            districts.forEach((d, i) => {
+              setTimeout(() => {
+                const row = document.createElement('div');
+                row.className = 'dist-row visible';
+                row.style.background = d.color;
+                row.innerHTML = `<span>${d.name}</span><span id="d-cnt-${i}">0</span>`;
+                scrollBox.appendChild(row);
+                animateCounter(`d-cnt-${i}`, d.count);
+              }, i * 50); // Loaded faster for long list
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
 
-  // Attach observer after DOM is ready
-  window.addEventListener('DOMContentLoaded', () => {
-    counters.forEach(counter => {
-      const el = document.getElementById(counter.id);
-      if (el) observer.observe(el);
-    });
-  });
-</script>
-
- <!-- End partner item -->
-
-         <!-- Item 1 -->
-            <div class="swiper-slide">
-              <div class="partner-item">
-                <img src="./assets/images/fav.png" class="partner-img" alt="" />
-                <h3>DYFI - TAMILNADU</h3>
-                <p>
-                 
-                </p>
-              </div>
-            </div>
-       <!-- End partner item -->
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-      </div>
-    </div>
-  </section>
+      observer.observe(document.getElementById('partners'));
+    })();
+  </script>
+           </section>
 <!-- End Partner Section -->
 
   <!-----footer------->
